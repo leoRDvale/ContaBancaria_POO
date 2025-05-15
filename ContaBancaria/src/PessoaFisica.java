@@ -3,10 +3,6 @@ public class PessoaFisica extends Pessoa {
 
     public PessoaFisica(String nome, String cpf) {
         super(nome);
-
-        if (cpf == null || cpf.length() != 11) {
-            throw new IllegalArgumentException("CPF INVÁLIDO!");
-        }
         this.cpf = cpf;
     }
 

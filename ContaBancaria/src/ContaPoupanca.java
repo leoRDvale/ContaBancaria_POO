@@ -1,19 +1,21 @@
 public class ContaPoupanca extends Conta{
-    private String cpf;
 
-    public ContaPoupanca(String nome, int numero, String cpf) {
-        super(nome, numero, 0.0);
-        this.cpf = cpf;
+    private double redimento;
+
+    public ContaPoupanca(Pessoa pessoa) {
+        super(pessoa);
+        this.redimento = 0.05;
     }
 
-    public String getCpf() {
-        return cpf;
+    public double getRedimento() {
+        return redimento;
     }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+
+    public void setRedimento(double redimento) {
+        this.redimento = redimento;
     }
 
     public void rendimentoPoupanca(){
-        depositar(getSaldo()*0.05);
+        super.setSaldo(super.getSaldo()*getRedimento());
     }
 }

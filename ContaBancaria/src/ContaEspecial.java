@@ -1,14 +1,12 @@
-import javax.swing.*;
 import java.util.InputMismatchException;
 
 public class ContaEspecial extends Conta{
-    private String cpf;
     private double limite;
 
-    public ContaEspecial(String nome, int numero, String cpf) {
-        super(nome, numero, 0.0);
-        this.cpf = cpf;
-        this.limite = 2000;
+
+    public ContaEspecial(Pessoa pessoa) {
+        super(pessoa);
+        this.limite = 2000.00;
     }
 
     public double getLimite() {
@@ -19,6 +17,7 @@ public class ContaEspecial extends Conta{
         this.limite = limite;
     }
 
+    @Override
     public boolean sacar (double valor) {
         if (valor > 0 && valor <= getSaldo() + limite) {
             setSaldo(getSaldo() - valor);

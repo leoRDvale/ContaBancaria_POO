@@ -1,30 +1,21 @@
-public class Conta extends Pessoa {
+abstract public class Conta {
     private static int contador = 1;
-    private String nome;
     private int numero;
     private double saldo;
+    private Pessoa pessoa;
 
-    public Conta(String nome, int numero, double saldo) {
-        super(nome);
-        this.nome = nome;
+    public Conta(Pessoa pessoa) {
         this.numero = contador++;
         this.saldo = 0.0;
+        this.pessoa = pessoa;
     }
 
-    public static int getContador() {
+    public int getContador() {
         return contador;
     }
 
-    public static void setContador(int contador) {
-        Conta.contador = contador;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setContador(int contador) {
+        this.contador = contador;
     }
 
     public int getNumero() {
@@ -41,6 +32,14 @@ public class Conta extends Pessoa {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public boolean depositar(double valor) {

@@ -12,7 +12,7 @@ public class Main {
 
 
         while (true) {
-            int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "****** Bem-vindo ao banco Nubank ****** \n\n Digite a opção desejada:\n 1 - Criar Conta\n 2 - Depositar \n 3 - Sacar \n 4 - Transferir \n 5 - Extrato \n 6 - Sair"));
+            int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "****** Bem-vindo ao banco Nubank ****** \n\n Digite a opção desejada:\n 1 - Criar Conta\n 2 - Depositar \n 3 - Sacar \n 4 - Transferir \n 5 - Extrato \n 6 - Redimento \n 7 - Sair"));
 
             switch (opcao) {
 
@@ -21,19 +21,38 @@ public class Main {
                     if (tipo == 1) {
                         String nome = JOptionPane.showInputDialog(null, "Digite o nome do titular: ");
                         String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do titular: ");
-                        contas.add(new ContaCorrente(nome, Conta.getContador(), cpf));
+                        Pessoa p1 = new PessoaFisica(nome, cpf);
+                        Conta c1 = new ContaCorrente(p1);
+                        contas.add(c1);
+
+                       /* if(p1 instanceof PessoaFisica){
+                            PessoaFisica pf = (PessoaFisica) p1;
+                            if(pf.getCpf());
+                        } */
+
+
                     } else if (tipo == 2) {
                         String nome = JOptionPane.showInputDialog(null, "Digite o nome do titular: ");
                         String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do titular: ");
-                        contas.add(new ContaPoupanca(nome, Conta.getContador(), cpf));
+                        Pessoa p2 = new PessoaFisica(nome, cpf);
+                        Conta c2 = new ContaPoupanca(p2);
+                        contas.add(c2);
+
                     } else if (tipo == 3) {
                         String nome = JOptionPane.showInputDialog(null, "Digite o nome do titular: ");
                         String cpf = JOptionPane.showInputDialog(null, "Digite o CPF do titular: ");
-                        contas.add(new ContaEspecial(nome, Conta.getContador(), cpf));
+                        Pessoa p3 = new PessoaFisica(nome, cpf);
+                        Conta c3 = new ContaEspecial(p3);
+                        contas.add(c3);
+
+
                     } else if (tipo == 4) {
                         String nome = JOptionPane.showInputDialog(null, "Digite o nome razão da empresa: ");
                         String cnpj = JOptionPane.showInputDialog(null, "Digite o CNPJ: ");
-                        contas.add(new ContaEmpresarial(nome, Conta.getContador(), cnpj));
+                        Pessoa p4 = new PessoaJuridica(nome, cnpj);
+                        Conta c4 = new ContaEmpresarial(p4);
+                        contas.add(c4);
+
                     } else if (tipo == 5) {
                        continue;
                     } else {
@@ -45,7 +64,7 @@ public class Main {
                     String nomeDeposito = JOptionPane.showInputDialog(null, "Digite o nome do titular: ");
                     double valorDeposito = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor a ser depositado: "));
                     for (Conta conta : contas) {
-                        if (conta.getNome().equalsIgnoreCase(nomeDeposito)) {
+                        if (conta.getPessoa().getNome().equalsIgnoreCase(nomeDeposito)) {
                             conta.depositar(valorDeposito);
                             JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!");
                             break;
@@ -57,7 +76,7 @@ public class Main {
                     String nomeSaque = JOptionPane.showInputDialog(null, "Digite o nome do titular: ");
                     double valorSaque = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor a ser sacado: "));
                     for (Conta conta : contas) {
-                        if (conta.getNome().equalsIgnoreCase(nomeSaque)) {
+                        if (conta.getPessoa().getNome().equalsIgnoreCase(nomeSaque)) {
                             if (conta.sacar(valorSaque)) {
                                 JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!");
                             } else {
@@ -75,9 +94,9 @@ public class Main {
                     Conta contaOrigem = null;
                     Conta contaDestino = null;
                     for (Conta conta : contas) {
-                        if (conta.getNome().equalsIgnoreCase(nomeTransferencia)) {
+                        if (conta.getPessoa().getNome().equalsIgnoreCase(nomeTransferencia)) {
                             contaOrigem = conta;
-                        } else if (conta.getNome().equalsIgnoreCase(nomeDestino)) {
+                        } else if (conta.getPessoa().getNome().equalsIgnoreCase(nomeDestino)) {
                             contaDestino = conta;
                         }
                     }
@@ -96,14 +115,19 @@ public class Main {
                 case 5:
                     String nomeExtrato = JOptionPane.showInputDialog(null, "Digite o nome do titular: ");
                     for (Conta conta : contas) {
-                        if (conta.getNome().equalsIgnoreCase(nomeExtrato)) {
-                            JOptionPane.showMessageDialog(null, "Extrato da conta de " + conta.getNome() + ": \nNúmero: " + conta.getNumero() + "\nSaldo: " + conta.getSaldo());
+                        if (conta.getPessoa().getNome().equalsIgnoreCase(nomeExtrato)) {
+                            JOptionPane.showMessageDialog(null, "Extrato da conta de " + conta.getPessoa().getNome() + ": \nNúmero: " + conta.getNumero() + "\nSaldo: " + conta.getSaldo());
                             break;
                         }
                     }
                     break;
 
+
                 case 6:
+                    
+
+
+                case 7:
                     JOptionPane.showMessageDialog(null, "Obrigado por usar o banco Nubank!");
                     System.exit(0);
                     break;

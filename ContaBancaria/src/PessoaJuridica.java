@@ -3,10 +3,6 @@ public class PessoaJuridica extends Pessoa{
 
     public PessoaJuridica(String nome, String cnpj) {
         super(nome);
-
-        if (cnpj == null || cnpj.length() != 14) {
-            throw new IllegalArgumentException("CNPJ INVÁLIDO!");
-        }
         this.cnpj = cnpj;
     }
 
